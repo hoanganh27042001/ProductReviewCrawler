@@ -1,7 +1,7 @@
 ## ProductReviewCrawler
 - collecting review from 2 eCommerce website: Tiki and Shoppee. For each type of website:
   
-	search_product_by_keyword(keyword: str, limit: str = '20'):   
+search_product_by_keyword(keyword: str, limit: str = '20'):   
 	return a list of product (name, shopid, itemid); limit = maximum products returned
   
 find_reviews_by_keyword(keyword: str, limit: int = 20):  
