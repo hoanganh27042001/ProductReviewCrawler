@@ -4,10 +4,13 @@ import json
 import re
 import urllib
 Shopee_url = 'https://shopee.vn'
-keyword_search = 'electrical device'
-headers = {'User-Agent': 'Chrome',
-               'Referer': '{}/search?keyword={}'.format(Shopee_url, keyword_search)
+keyword_search = 'chuot-khong-day-multi-device-dell-ms5320w'
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
+               'referer': '{}/search?keyword={}'.format(Shopee_url, keyword_search)
                }
+# headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53",
+#                'Referer': '{}/search?q={}'.format(Shopee_url, keyword_search)
+#                }
 class Shopee:
     def __init__(self, url: str):
         self.url = url
@@ -18,9 +21,10 @@ class Shopee:
         print('url = ', url)
         # Shopee API request
         response = requests.get(url, headers=headers)
-        if requests.get(url, headers=headers).status_code == 403:
-            print('Cannot request url!!!')
-            return []
+        print(response,headers)
+        # if requests.get(url, headers=headers).status_code == 403:
+        #     print('Cannot request url!!!')
+        #     return []
         r = response.json()
         print(json.dumps(r, indent=2))
         for item in r["items"]:
@@ -100,20 +104,24 @@ class Shopee:
 
 if __name__ == '__main__':
     new = Shopee(Shopee_url)
-    # list = new.search_product_by_keyword(keyword_search)
-    # df = pd.DataFrame(list)
-    # print(df)  # print only the head for brevity
-    # print("-" * 80)
-
-    url = 'https://shopee.vn/D%C3%89P-T%C3%94NG-N%C6%A0-K%E1%BA%BA-CARO-i.7332956.19101749350?sp_atk=08cca8a5-dabe-47ae-bcf5-6b8c3dc93d9d&xptdk=08cca8a5-dabe-47ae-bcf5-6b8c3dc93d9d'
-    res = new.find_reviews_by_keyword('heat shrink tube tubing kit tool black shrinkage set safely protect electrical')
-    # res = new.find_reviews_by_keyword('chuot-khong-day-multi-device-dell-ms5320w')
-    # res = new.find_reviews_by_url(url)
-    print(res)
+    # # list = new.search_product_by_keyword(keyword_search)
+    # # df = pd.DataFrame(list)
+    # # print(df)  # print only the head for brevity
+    # # print("-" * 80)
+    #
+    # url = 'https://shopee.vn/D%C3%89P-T%C3%94NG-N%C6%A0-K%E1%BA%BA-CARO-i.7332956.19101749350?sp_atk=08cca8a5-dabe-47ae-bcf5-6b8c3dc93d9d&xptdk=08cca8a5-dabe-47ae-bcf5-6b8c3dc93d9d'
+    # res = new.find_reviews_by_keyword('heat shrink tube tubing kit tool black shrinkage set safely protect electrical')
+    res = new.search_product_by_keyword('chuot-khong-day-multi-device-dell-ms5320w')
+    # # res = new.find_reviews_by_url(url)
+    # print(res)
     print(json.dumps(res, indent=2))
-    print(pd.DataFrame(res))
+    # print(pd.DataFrame(res))
 
         # filename = 'shopee.json'
         # with open(filename, 'w', encoding='utf8') as file_object:  #open the file in write mode
         #  json.dump(r, file_object, ensure_ascii=False)
+    # url = "https://shopee.vn/api/v4/search/search_items?keyword=macbook%20pro&limit=2"
+    # response = requests.get(url)
+    # # r = response.json()
+    # print(response.content)
 
